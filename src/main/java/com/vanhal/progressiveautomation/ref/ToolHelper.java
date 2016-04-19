@@ -102,8 +102,9 @@ public class ToolHelper {
 
 	//check for the tinkers tag
 	public static int tinkersLevel(ItemStack item) {
-		if (item.getTagCompound().hasKey("InfiTool")) {
-			NBTTagCompound tags = item.getTagCompound().getCompoundTag("InfiTool");
+		if (item.getTagCompound().hasKey("Stats")) {
+			NBTTagCompound tags = item.getTagCompound().getCompoundTag("Stats");
+
 			int toolLevel = tags.getInteger("HarvestLevel");
 			return toolLevel;
 		}
@@ -113,20 +114,21 @@ public class ToolHelper {
 	//Get the type of tinker tool
 	public static int tinkersType(Item item) {
 		String name = item.getUnlocalizedName();
+		//ProgressiveAutomation.logger.info(name);
 		if (name.length()>=14) {
-			if (name.substring(5, 13).equalsIgnoreCase("InfiTool")) {
-				if (name.substring(14).equalsIgnoreCase("pickaxe")) {
+			if (name.substring(5, 15).equalsIgnoreCase("tconstruct")) {
+				if (name.substring(16).equalsIgnoreCase("pickaxe")) {
 					return TYPE_PICKAXE;
-				} else if (name.substring(14).equalsIgnoreCase("axe")) {
+				} else if ( (name.substring(16).equalsIgnoreCase("axe")) || (name.substring(16).equalsIgnoreCase("hatchet")) ) {
 					return TYPE_AXE;
-				} else if (name.substring(14).equalsIgnoreCase("shovel")) {
+				} else if (name.substring(16).equalsIgnoreCase("shovel")) {
 					return TYPE_SHOVEL;
-				} else if ( (name.substring(14).equalsIgnoreCase("hoe")) || (name.substring(14).equalsIgnoreCase("Mattock")) ) {
+				} else if ( (name.substring(16).equalsIgnoreCase("hoe")) || (name.substring(16).equalsIgnoreCase("Mattock")) ) {
 					return TYPE_HOE;
-				} else if ( (name.substring(14).equalsIgnoreCase("Broadsword")) ||
-						(name.substring(14).equalsIgnoreCase("Rapier")) ||
-						(name.substring(14).equalsIgnoreCase("Cutlass")) ||
-						(name.substring(14).equalsIgnoreCase("Cleaver")) ) {
+				} else if ( (name.substring(16).equalsIgnoreCase("Broadsword")) ||
+						(name.substring(16).equalsIgnoreCase("Rapier")) ||
+						(name.substring(16).equalsIgnoreCase("Cutlass")) ||
+						(name.substring(16).equalsIgnoreCase("Cleaver")) ) {
 					return TYPE_SWORD;
 				}
 			}
@@ -147,8 +149,8 @@ public class ToolHelper {
 	
 	public static boolean tinkersIsBroken(ItemStack item) {
 		if (item==null) return false;
-		if ( (item.hasTagCompound()) && (item.getTagCompound().hasKey("InfiTool")) ) {
-			NBTTagCompound tags = item.getTagCompound().getCompoundTag("InfiTool");
+		if ( (item.hasTagCompound()) && (item.getTagCompound().hasKey("Stats")) ) {
+			NBTTagCompound tags = item.getTagCompound().getCompoundTag("Stats");
 			return tags.getBoolean("Broken");
 		}
 		return false;
