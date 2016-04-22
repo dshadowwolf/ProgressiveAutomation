@@ -115,7 +115,7 @@ public class ToolHelper {
 	public static int tinkersType(Item item) {
 		String name = item.getUnlocalizedName();
 		//ProgressiveAutomation.logger.info(name);
-		if (name.length()>=14) {
+		if (name.length()>=16) {
 			if (name.substring(5, 15).equalsIgnoreCase("tconstruct")) {
 				if (name.substring(16).equalsIgnoreCase("pickaxe")) {
 					return TYPE_PICKAXE;
